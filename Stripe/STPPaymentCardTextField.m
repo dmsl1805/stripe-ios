@@ -93,6 +93,7 @@ CGFloat const STPPaymentCardTextFieldDefaultPadding = 13;
     numberField.tag = STPCardFieldTypeNumber;
     numberField.accessibilityLabel = NSLocalizedString(@"card number", @"accessibility label for text field");
     numberField.textAlignment = NSTextAlignmentCenter;
+    numberField.text = self.numberText;
     if ( self.numberPlaceholderAttributed ) {
         self.numberField.attributedPlaceholder = self.numberPlaceholderAttributed;
     }
@@ -106,6 +107,7 @@ CGFloat const STPPaymentCardTextFieldDefaultPadding = 13;
     expirationField.textAlignment = NSTextAlignmentCenter;
     self.expirationField = expirationField;
     self.expirationPlaceholder = @"MM/YY";
+    self.expirationField.text = self.expirationText;
     if ( self.expirationPlaceholderAttributed ) {
         self.expirationField.attributedPlaceholder = self.expirationPlaceholderAttributed;
     }
@@ -115,6 +117,7 @@ CGFloat const STPPaymentCardTextFieldDefaultPadding = 13;
 
     self.cvcField = cvcField;
     self.cvcPlaceholder = @"CVC";
+    self.cvcField.text = self.cvcText;
     self.cvcField.accessibilityLabel = self.cvcPlaceholder;
     if ( self.cvcPlaceholderAttributed ) {
         self.cvcField.attributedPlaceholder = self.cvcPlaceholderAttributed;
