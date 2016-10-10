@@ -97,16 +97,21 @@
  */
 @property(nonatomic, copy, nullable) NSString *numberPlaceholder;
 
+@property(nonatomic, copy, nullable) NSAttributedString *numberPlaceholderAttributed;
+
 /**
  *  The placeholder for the expiration field. Defaults to @"MM/YY".
  */
 @property(nonatomic, copy, nullable) NSString *expirationPlaceholder;
+
+@property(nonatomic, copy, nullable) NSAttributedString *expirationPlaceholderAttributed;
 
 /**
  *  The placeholder for the cvc field. Defaults to @"CVC".
  */
 @property(nonatomic, copy, nullable) NSString *cvcPlaceholder;
 
+@property(nonatomic, copy, nullable) NSAttributedString *cvcPlaceholderAttributed;
 /**
  *  The cursor color for the field. This is a proxy for the view's tintColor property, exposed for clarity only (in other words, calling setCursorColor is identical to calling setTintColor).
  */

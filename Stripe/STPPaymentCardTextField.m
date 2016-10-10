@@ -99,6 +99,9 @@ CGFloat const STPPaymentCardTextFieldDefaultPadding = 13;
     numberField.tag = STPCardFieldTypeNumber;
     numberField.accessibilityLabel = NSLocalizedString(@"card number", @"accessibility label for text field");
     numberField.textAlignment = NSTextAlignmentCenter;
+    if ( self.numberPlaceholderAttributed ) {
+        self.numberField.attributedPlaceholder = self.numberPlaceholderAttributed;
+    }
     self.numberField = numberField;
     self.numberPlaceholder = [self.viewModel defaultPlaceholder];
     
@@ -109,7 +112,9 @@ CGFloat const STPPaymentCardTextFieldDefaultPadding = 13;
     expirationField.textAlignment = NSTextAlignmentCenter;
     self.expirationField = expirationField;
     self.expirationPlaceholder = @"MM/YY";
-    
+    if ( self.expirationPlaceholderAttributed ) {
+        self.expirationField.attributedPlaceholder = self.expirationPlaceholderAttributed;
+    }
     STPFormTextField *cvcField = [self buildTextField];
     cvcField.tag = STPCardFieldTypeCVC;
     cvcField.textAlignment = NSTextAlignmentCenter;
@@ -117,6 +122,9 @@ CGFloat const STPPaymentCardTextFieldDefaultPadding = 13;
     self.cvcField = cvcField;
     self.cvcPlaceholder = @"CVC";
     self.cvcField.accessibilityLabel = self.cvcPlaceholder;
+    if ( self.cvcPlaceholderAttributed ) {
+        self.cvcField.attributedPlaceholder = self.cvcPlaceholderAttributed;
+    }
     
     UIView *fieldsView = [[UIView alloc] init];
     fieldsView.clipsToBounds = YES;
