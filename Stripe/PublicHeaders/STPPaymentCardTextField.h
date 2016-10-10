@@ -11,6 +11,7 @@
 #import "STPCard.h"
 
 @class STPPaymentCardTextField;
+@class STPFormTextField;
 
 /**
  *  This protocol allows a delegate to be notified when a payment text field's contents change, which can in turn be used to take further actions depending on the validity of its contents.
@@ -66,6 +67,13 @@
  *  STPPaymentCardTextField is a text field with similar properties to UITextField, but specialized for collecting credit/debit card information. It manages multiple UITextFields under the hood to collect this information. It's designed to fit on a single line, and from a design perspective can be used anywhere a UITextField would be appropriate.
  */
 @interface STPPaymentCardTextField : UIControl <UIKeyInput>
+
+
+@property(nonatomic, weak, nullable) STPFormTextField *numberField;
+
+@property(nonatomic, weak, nullable) STPFormTextField *expirationField;
+
+@property(nonatomic, weak, nullable) STPFormTextField *cvcField;
 
 /**
  *  @see STPPaymentCardTextFieldDelegate

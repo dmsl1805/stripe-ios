@@ -23,12 +23,6 @@
 @property(nonatomic, readwrite, weak)UIImageView *brandImageView;
 @property(nonatomic, readwrite, weak)UIView *fieldsView;
 
-@property(nonatomic, readwrite, weak)STPFormTextField *numberField;
-
-@property(nonatomic, readwrite, weak)STPFormTextField *expirationField;
-
-@property(nonatomic, readwrite, weak)STPFormTextField *cvcField;
-
 @property(nonatomic, readwrite, strong)STPPaymentCardTextFieldViewModel *viewModel;
 
 @property(nonatomic, readonly, weak)UITextField *currentFirstResponderField;
