@@ -93,10 +93,6 @@ CGFloat const STPPaymentCardTextFieldDefaultPadding = 13;
     numberField.tag = STPCardFieldTypeNumber;
     numberField.accessibilityLabel = NSLocalizedString(@"card number", @"accessibility label for text field");
     numberField.textAlignment = NSTextAlignmentCenter;
-    numberField.text = self.numberText;
-    if ( self.numberPlaceholderAttributed ) {
-        self.numberField.attributedPlaceholder = self.numberPlaceholderAttributed;
-    }
     self.numberField = numberField;
     self.numberPlaceholder = [self.viewModel defaultPlaceholder];
     
@@ -107,21 +103,14 @@ CGFloat const STPPaymentCardTextFieldDefaultPadding = 13;
     expirationField.textAlignment = NSTextAlignmentCenter;
     self.expirationField = expirationField;
     self.expirationPlaceholder = @"MM/YY";
-    self.expirationField.text = self.expirationText;
-    if ( self.expirationPlaceholderAttributed ) {
-        self.expirationField.attributedPlaceholder = self.expirationPlaceholderAttributed;
-    }
+
     STPFormTextField *cvcField = [self buildTextField];
     cvcField.tag = STPCardFieldTypeCVC;
     cvcField.textAlignment = NSTextAlignmentCenter;
 
     self.cvcField = cvcField;
     self.cvcPlaceholder = @"CVC";
-    self.cvcField.text = self.cvcText;
-    self.cvcField.accessibilityLabel = self.cvcPlaceholder;
-    if ( self.cvcPlaceholderAttributed ) {
-        self.cvcField.attributedPlaceholder = self.cvcPlaceholderAttributed;
-    }
+
     
     UIView *fieldsView = [[UIView alloc] init];
     fieldsView.clipsToBounds = YES;
@@ -133,6 +122,22 @@ CGFloat const STPPaymentCardTextFieldDefaultPadding = 13;
     [self.fieldsView addSubview:expirationField];
     [self.fieldsView addSubview:numberField];
     [self addSubview:brandImageView];
+}
+
+- (void)updateTextFields {
+    self.numberField.text = self.numberText;
+    if ( self.numberPlaceholderAttributed ) {
+        self.numberField.attributedPlaceholder = self.numberPlaceholderAttributed;
+    }
+    self.cvcField.text = self.cvcText;
+    self.cvcField.accessibilityLabel = self.cvcPlaceholder;
+    if ( self.cvcPlaceholderAttributed ) {
+        self.cvcField.attributedPlaceholder = self.cvcPlaceholderAttributed;
+    }
+    self.expirationField.text = self.expirationText;
+    if ( self.expirationPlaceholderAttributed ) {
+        self.expirationField.attributedPlaceholder = self.expirationPlaceholderAttributed;
+    }
 }
 
 - (STPPaymentCardTextFieldViewModel *)viewModel {

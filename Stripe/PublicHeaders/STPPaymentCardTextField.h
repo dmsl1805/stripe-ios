@@ -288,6 +288,8 @@
 
 - (void)commonInit;
 
+- (void)updateTextFields;
+
 @end
 
 #pragma mark - PaymentKit compatibility
