@@ -19,7 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor blackColor];
     self.title = @"Buy a shirt";
     if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)]) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -36,7 +36,8 @@
     // Setup payment view
     STPPaymentCardTextField *paymentTextField = [[STPPaymentCardTextField alloc] init];
     paymentTextField.delegate = self;
-    paymentTextField.cursorColor = [UIColor purpleColor];
+    paymentTextField.textColor = [UIColor whiteColor];
+    paymentTextField.borderWidth = 0;
     self.paymentTextField = paymentTextField;
     [self.view addSubview:paymentTextField];
     
@@ -51,7 +52,7 @@
     [super viewDidLayoutSubviews];
     CGFloat padding = 15;
     CGFloat width = CGRectGetWidth(self.view.frame) - (padding * 2);
-    self.paymentTextField.frame = CGRectMake(padding, padding, width, 44);
+    self.paymentTextField.frame = CGRectMake(padding, padding, width, 144);
     
     self.activityIndicator.center = self.view.center;
 }

@@ -24,7 +24,6 @@
 @property(nonatomic, readwrite, weak)STPFormTextField *cvcField;
 @property(nonatomic, readonly, weak)STPFormTextField *currentFirstResponderField;
 @property(nonatomic, readwrite, strong)STPPaymentCardTextFieldViewModel *viewModel;
-@property(nonatomic, assign)BOOL numberFieldShrunk;
 + (UIImage *)cvcImageForCardBrand:(STPCardBrand)cardBrand;
 + (UIImage *)brandImageForCardBrand:(STPCardBrand)cardBrand;
 @end

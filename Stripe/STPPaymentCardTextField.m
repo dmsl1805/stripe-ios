@@ -482,40 +482,28 @@ CGFloat const STPPaymentCardTextFieldDefaultPadding = 13;
     return CGRectMake(CGRectGetMidX(bounds) - CGRectGetMidX(bounds) / 2 - self.brandImageView.image.size.width, 0, self.brandImageView.image.size.width, 50);
 }
 
+- (CGRect)brandImageRect {
+    return CGRectMake(0, 0, self.brandImageView.image.size.width, 50);
+}
+
 - (CGRect)fieldsRectForBounds:(CGRect)bounds {
-    CGRect brandImageRect = [self brandImageRectForBounds:bounds];
+    CGRect brandImageRect = [self brandImageRect];
     return CGRectMake(CGRectGetMaxX(brandImageRect), 0, CGRectGetWidth(bounds) - CGRectGetMaxX(brandImageRect), CGRectGetHeight(bounds));
 }
 
 - (CGRect)numberFieldRectForBounds:(CGRect)bounds {
-    CGPoint sa = bounds.origin;
-    sa.x = 0;
-    
-    CGFloat placeholderWidth = [self widthForCardNumber:self.numberField.placeholder] - 4;
-    CGFloat numberWidth = [self widthForCardNumber:self.viewModel.defaultPlaceholder] - 4;
-    CGFloat numberFieldWidth = MAX(placeholderWidth, numberWidth);
-    CGFloat nonFragmentWidth = [self widthForCardNumber:[self.viewModel numberWithoutLastDigits]] - 12;
-    CGFloat numberFieldX = self.numberFieldShrunk ? STPPaymentCardTextFieldDefaultPadding - nonFragmentWidth : 8;
-    return CGRectMake(numberFieldX, 0, numberFieldWidth, 50);
+    CGFloat imageWidth = self.brandImageView.bounds.size.width;
+    CGFloat numberFieldWidth = bounds.size.width - imageWidth - STPPaymentCardTextFieldDefaultPadding - 45;
+    return CGRectMake(STPPaymentCardTextFieldDefaultPadding, 0, numberFieldWidth, 50);
 }
 
 - (CGRect)cvcFieldRectForBounds:(CGRect)bounds {
-    //    CGRect fieldsRect = [self fieldsRectForBounds:bounds];
-    
-    CGFloat cvcWidth = MAX([self widthForText:self.cvcField.placeholder], [self widthForText:@"8888"]);
-    //    CGFloat cvcX = self.numberFieldShrunk ?
-    //    CGRectGetWidth(fieldsRect) - cvcWidth - STPPaymentCardTextFieldDefaultPadding / 2  :
-    //    CGRectGetWidth(fieldsRect);
-    return CGRectMake(self.numberField.bounds.size.width + self.numberField.bounds.origin.x - cvcWidth, bounds.size.height - 150 / 2, cvcWidth, 50);
+    CGFloat cvcWidth = (bounds.size.width - ( bounds.size.width - self.numberField.bounds.size.width + 20 )) / 2;
+    return CGRectMake(STPPaymentCardTextFieldDefaultPadding + 20 + self.expirationField.bounds.size.width, bounds.size.height - 150 / 2, cvcWidth, 50);
 }
 
 - (CGRect)expirationFieldRectForBounds:(CGRect)bounds {
-    //    CGRect cvcRect = [self cvcFieldRectForBounds:bounds];
-    
-    CGFloat expirationWidth = MAX([self widthForText:self.expirationField.placeholder], [self widthForText:@"88/88"]);
-    //    CGFloat expirationX = (bounds.size.width - (CGRectGetWidth(cvcRect) + expirationWidth)) / 2;
-    CGRect x = bounds;
-    x.origin.x = 0;
+    CGFloat expirationWidth = (bounds.size.width - ( bounds.size.width - self.numberField.bounds.size.width + 20 )) / 2;
     return CGRectMake(STPPaymentCardTextFieldDefaultPadding, bounds.size.height - 150 / 2, expirationWidth, 50);
 }
 
@@ -524,12 +512,11 @@ CGFloat const STPPaymentCardTextFieldDefaultPadding = 13;
     
     CGRect bounds = self.bounds;
     
-    self.brandImageView.frame = [self brandImageRectForBounds:bounds];
+    self.brandImageView.frame = [self brandImageRect];
     self.fieldsView.frame = [self fieldsRectForBounds:bounds];
-    self.numberField.frame = [self numberFieldRectForBounds:CGRectZero];
-    self.cvcField.frame = [self cvcFieldRectForBounds:bounds];
+    self.numberField.frame = [self numberFieldRectForBounds:bounds];
     self.expirationField.frame = [self expirationFieldRectForBounds:bounds];
-    
+    self.cvcField.frame = [self cvcFieldRectForBounds:bounds];
 }
 
 #pragma mark - private helper methods
