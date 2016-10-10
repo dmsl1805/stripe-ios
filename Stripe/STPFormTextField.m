@@ -76,6 +76,9 @@ typedef NSAttributedString* (^STPFormTextTransformationBlock)(NSAttributedString
 @property(nonatomic, copy)STPFormTextTransformationBlock textFormattingBlock;
 // This property only exists to disable keyboard loading in Travis CI due to a crash that occurs while trying to load the keyboard. Don't use it outside of tests.
 @property(nonatomic)BOOL skipsReloadingInputViews;
+@property (nonatomic) CALayer *topBorder;
+@property (nonatomic) CALayer *bottomBorder;
+
 @end
 
 @implementation STPFormTextField
@@ -309,6 +312,28 @@ typedef NSAttributedString* (^STPFormTextTransformationBlock)(NSAttributedString
 
 - (id <UITextFieldDelegate>)delegate {
     return self.delegateProxy;
+}
+
+- (void)didMoveToSuperview {
+    [super didMoveToSuperview];
+    if (self.topBorder == nil) {
+        self.topBorder = [CALayer layer];
+        self.topBorder.backgroundColor = [UIColor grayColor].CGColor;
+        [self.layer addSublayer:self.topBorder];
+    }
+    
+    if (self.bottomBorder == nil) {
+        self.bottomBorder = [CALayer layer];
+        self.bottomBorder.backgroundColor = [UIColor grayColor].CGColor;
+        [self.layer addSublayer:self.bottomBorder];
+    }
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    CGRect frame = self.layer.bounds;
+    self.bottomBorder.frame = CGRectMake(0, frame.size.height - 1, frame.size.width, 1);
+    self.topBorder.frame = CGRectMake(0, 0, frame.size.width, 1);
 }
 
 @end
